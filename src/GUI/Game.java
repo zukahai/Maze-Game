@@ -7,11 +7,15 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Vector;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import Class.Figure;
+import Class.Point;
 
 
 public class Game extends JFrame implements KeyListener{
@@ -20,6 +24,7 @@ public class Game extends JFrame implements KeyListener{
 	int II = 500;
 	int JJ = 500;
 	Container cn;
+	Figure F = new Figure(508, 514);
 	JButton bt[][] = new JButton[M][N];
 	int a[][] = new int[1000][1000];
 	public Game() {
@@ -44,6 +49,12 @@ public class Game extends JFrame implements KeyListener{
 					bt[i][j].setBackground(Color.black);
 				else
 					bt[i][j].setBackground(Color.white);
+		Vector vv = F.getVec();
+//		F.getTt().Display();
+		for (int i = 0; i < vv.size(); i++) {
+			Point p = (Point) vv.elementAt(i);
+			bt[p.getX() - II][p.getY() - JJ].setBackground(Color.green);
+		}
 	}
 	
 	public Container init() {
@@ -86,16 +97,24 @@ public class Game extends JFrame implements KeyListener{
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == e.VK_UP) {
-			II --;
+			if (F.getDirection() == 1)
+				II --;
+			F = F.next(1);
 			update();
 		} else if (e.getKeyCode() == e.VK_DOWN) {
-			II++;
+			if (F.getDirection() == 3)
+				II++;
+			F = F.next(3);
 			update();
 		} else if (e.getKeyCode() == e.VK_LEFT) {
-			JJ--;
+			if (F.getDirection() == 4)
+				JJ--;
+			F = F.next(4);
 			update();
 		} else if (e.getKeyCode() == e.VK_RIGHT) {
-			JJ++;
+			if (F.getDirection() == 2)
+				JJ++;
+			F = F.next(2);
 			update();
 		}
 	}
