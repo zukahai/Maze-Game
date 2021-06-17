@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 public class Maze extends JFrame implements ActionListener, KeyListener{
 	int key = 0;
-	int M = 20, N = 20;
+	int M = 30, N = 30;
 	JButton bt[][] = new JButton[100][100];
 	int a[][] = new int [M][N];
 	Container cn;
