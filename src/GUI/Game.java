@@ -20,6 +20,7 @@ import Class.Point;
 
 
 public class Game extends JFrame implements KeyListener{
+	MiniMap mmm = new MiniMap();
 	int M = 15;
 	int N = 20;
 	int II = 100;
@@ -33,6 +34,7 @@ public class Game extends JFrame implements KeyListener{
 	Figure F = new Figure(108, 114);
 	JButton bt[][] = new JButton[M][N];
 	int a[][] = new int[300][300];
+	int A[][] = new int[30][30];
 	public Game() {
 		super("Tank Game - HaiZuka");
 		ininMaxtrix();
@@ -43,6 +45,10 @@ public class Game extends JFrame implements KeyListener{
 		int k = 1;
 		String dt = data[k];
 		int index = 0;
+		
+		for (int i = 0; i < 30; i++)
+			for (int j = 0; j < 30; j++)
+				A[i][j] = 1;
 		
 		for (int i = 0; i < 300; i += 10)
 			for (int j = 0; j < 300; j += 10) {
@@ -72,15 +78,27 @@ public class Game extends JFrame implements KeyListener{
 			for (int j = 0; j < N; j++)
 				bt[i][j].setBackground(cl[a[i + II][j + JJ]]);
 		Vector vv = F.getVec();
+		Point p = F.getTt();
+		for (int i = -1; i <= 1; i++)
+			for (int j = -1; j <= 1; j++) 
+				if (A[p.getX() / 10 + i][p.getY() / 10 + j] != 5){
+					A[p.getX() / 10 + i][p.getY() / 10 + j] = a[p.getX() + i * 10][p.getY() + j * 10];
+					if (A[p.getX() / 10 + i][p.getY() / 10 + j] == 4)
+						A[p.getX() / 10 + i][p.getY() / 10 + j] = 0;
+				}
+		if (A[p.getX() / 10 ][p.getY() / 10] == 0)
+			A[p.getX() / 10 ][p.getY() / 10] = 5;
+		
 //		F.getTt().Display();
 		for (int i = 0; i < vv.size(); i++) {
-			Point p = (Point) vv.elementAt(i);
+			p = (Point) vv.elementAt(i);
 			bt[p.getX() - II][p.getY() - JJ].setBackground(Color.blue);
 			if (a[p.getX()][p.getY()] == 3) {
 				JOptionPane.showMessageDialog(null, "Win");
 				System.exit(0);
 			}
 		}
+		mmm.Update(A, F.getTt());
 	}
 	
 	public Container init() {
@@ -104,6 +122,7 @@ public class Game extends JFrame implements KeyListener{
 		this.setLocationRelativeTo(null);
 		setResizable(false);
 		update();
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
 //		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		return cn;
 	}
