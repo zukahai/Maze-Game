@@ -51,7 +51,7 @@ public class Figure {
 	public Figure next(int N) {
 		Figure F = new Figure(tt.getX(), tt.getY());
 		if (N == this.direction) {
-			System.out.println("OK");
+//			System.out.println("OK");
 			F.setTt(new Point(tt.getX() + xx[N - 1], tt.getY() + yy[N - 1]));
 		}
 		F.setDirection(N);

@@ -23,10 +23,12 @@ public class Game extends JFrame implements KeyListener{
 	int N = 29;
 	int II = 500;
 	int JJ = 500;
+	String data[] = {"1111111111111111111111111111111111111111111111011011100001111110000010111010111111101010101000100111111010111011101011111110001100011010111111101011010000000111111010110101111101111110120001010001011111101111111101010111111010000300000001111110111111111110011111100000000010100111111111111110101001111110101010101011011111101010101010110111111000000000000001111111111111111111111111111111111111111111",
+					""};
 	Container cn;
-	Figure F = new Figure(508, 514);
+	Figure F = new Figure(108, 114);
 	JButton bt[][] = new JButton[M][N];
-	int a[][] = new int[1000][1000];
+	int a[][] = new int[200][200];
 	public Game() {
 		super("Tank Game - HaiZuka");
 		ininMaxtrix();
@@ -34,6 +36,8 @@ public class Game extends JFrame implements KeyListener{
 	}
 	
 	public void ininMaxtrix() {
+		int k = 0;
+		
 		for (int i = 6; i < 1000; i += 13)
 			for (int j = 6; j < 1000; j += 12) {
 				for (int I = i - 5; I < i; I++)
