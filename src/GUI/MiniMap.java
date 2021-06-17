@@ -41,7 +41,7 @@ public class MiniMap extends JFrame{
 		
 		this.setVisible(true);
 		this.setSize(400, 400);
-		this.setLocationRelativeTo(null);
+//		this.setLocationRelativeTo(null);
 //		setResizable(false);
 //		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		return cn;
