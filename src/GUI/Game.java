@@ -29,8 +29,8 @@ public class Game extends JFrame implements KeyListener{
 	int a[][] = new int[1000][1000];
 	public Game() {
 		super("Tank Game - HaiZuka");
-		cn = init();
 		ininMaxtrix();
+		cn = init();
 	}
 	
 	public void ininMaxtrix() {
@@ -46,9 +46,9 @@ public class Game extends JFrame implements KeyListener{
 		for (int i = 0; i < M; i++)
 			for (int j = 0; j < N; j++)
 				if (a[i + II][j + JJ] == 1)
-					bt[i][j].setBackground(Color.black);
+					bt[i][j].setBackground(Color.cyan);
 				else
-					bt[i][j].setBackground(Color.white);
+					bt[i][j].setBackground(Color.black);
 		Vector vv = F.getVec();
 //		F.getTt().Display();
 		for (int i = 0; i < vv.size(); i++) {
@@ -67,6 +67,7 @@ public class Game extends JFrame implements KeyListener{
 			for (int j = 0; j < N; j++) {
 				bt[i][j] = new JButton();
 				bt[i][j].addKeyListener(this);
+				bt[i][j].setBorder(null);
 				pn.add(bt[i][j]);
 			}
 		
@@ -76,7 +77,7 @@ public class Game extends JFrame implements KeyListener{
 		this.setSize(1300, 700);
 		this.setLocationRelativeTo(null);
 		setResizable(false);
-		
+		update();
 //		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		return cn;
 	}
