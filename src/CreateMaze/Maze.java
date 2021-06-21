@@ -2,6 +2,7 @@ package CreateMaze;
 
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,6 +20,7 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 	int a[][] = new int [M][N];
 	Container cn;
 	Color cl[] = {Color.lightGray, Color.black, Color.red, Color.green};
+	JButton type_bt, Result_bt;
 	
 	public Maze() {
 		for (int i = 0; i < M; i++)
@@ -51,7 +53,23 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 				pn.add(bt[i][j]);
 			}
 		
+		JPanel pn2 = new JPanel();
+		pn2.setLayout(new FlowLayout());
+		
+		type_bt = new JButton("    ");
+		type_bt.setActionCommand("type_bt");
+		type_bt.addActionListener(this);
+		type_bt.setBackground(cl[key]);
+		
+		Result_bt = new JButton("Result");
+		Result_bt.addActionListener(this);
+		
+		pn2.add(type_bt);
+		pn2.add(Result_bt);
+		
+		
 		cn.add(pn);
+		cn.add(pn2, "South");
 		cn.addKeyListener(this);
 		
 		this.setVisible(true);
@@ -65,12 +83,19 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		int K = Integer.parseInt(e.getActionCommand());
-		int J = K % N;
-		int I = K / N;
-		a[I][J] = key;
-		if (key < 4)
-			bt[I][J].setBackground(cl[key]);
+		if (e.getActionCommand().equals(type_bt.getActionCommand())) {
+			key ++;
+			if (key == 4)
+				key = 0;
+			type_bt.setBackground(cl[key]);
+		} else {
+			int K = Integer.parseInt(e.getActionCommand());
+			int J = K % N;
+			int I = K / N;
+			a[I][J] = key;
+			if (key < 4)
+				bt[I][J].setBackground(cl[key]);
+		}
 	}
 
 
