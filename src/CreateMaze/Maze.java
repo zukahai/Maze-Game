@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.Vector;
 
@@ -93,8 +95,11 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 	}
 
 	public void BFS() {
-		int MMM = 111111;
-		Stack<Point> st = new Stack<>();
+		for (int i = 0; i < M; i++)
+			for (int j = 0; j < N; j++) 
+				bt[i][j].setBackground(cl[a[i][j]]);
+		int MMM = -1111;
+		Queue<Point> st = new LinkedList<>();
 		int x[] = new int [M + 1];
 		int y[] = new int [N + 1];
 		int b[][] = new int [M + 1][N + 1];
@@ -112,10 +117,10 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 				}
 			}
 		
-		st.push(p);
+		st.add(p);
 		boolean kt = false;
-		while (!st.empty() && !kt) {
-			p = st.pop();
+		while (!st.isEmpty() && !kt) {
+			p = st.poll();
 			int X = (int) p.getX();
 			int Y = (int) p.getY();
 			System.out.println(b[X][Y]);
@@ -124,28 +129,30 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 					if (i >= 0 && i < M && j >= 0 && j < N &&Math.abs(i - X) + Math.abs(j - Y) == 1) {
 						if (b[i][j] == MMM && (a[i][j] == 0 || a[i][j] == 3)) {
 							b[i][j] = b[X][Y] + 1;
-							st.push(new Point(i, j));
-							if (a[i][j] == 3) {
-								kt = true;
-							}
+							st.add(new Point(i, j));
 						}
 							
 					}
 			
 		}
 		
-		int X = (int) d.getX();
-		int Y = (int) d.getY();
 		for (int i = 0; i < M; i++) {
 			for (int j = 0; j < N; j++)
 				System.out.print(b[i][j] + " ");
 			System.out.println();
 		}
+		for (int i = 0; i < M; i++)
+			for (int j = 0; j < N; j++)
+				if (b[i][j] != MMM && a[i][j] == 3 && b[i][j] < b[(int) d.getX()][(int) d.getY()]) {
+					d = new Point(i, j);
+				}
+		int X = (int) d.getX();
+		int Y = (int) d.getY();
 		if (b[X][Y] == MMM) {
 			return;
 		}
-//		System.out.println(X + " " + Y + " " + b[X][Y]);
-		while (a[X][Y] != 2) {
+		System.out.println(X + " " + Y + " " + b[X][Y]);
+		while (b[X][Y] > 1) {
 			System.out.println(X + " " + Y);
 			for (int i = X - 1; i <= X + 1; i++)
 				for (int j = Y - 1; j <= Y + 1; j++)
@@ -157,7 +164,6 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 						Y = j;
 					}
 		}
-		
 	}
 	
 	@Override
@@ -229,7 +235,6 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Maze("111111111111111111111111111111111111111111111111111111111111110000110000110100000010000011110110000110000101111010111011110111111111101101111010111011110000101000001100001110001111110111101011111101100000101111110100001010111101111111100011110101001000110001111111111011110101011010110111111110000011110111011011110111000000111111110000001011000100011110001111110111101011010111011111100011110100001011211111011111101011110111111011110000011111111011110000111000110111110000011011110110111110110000100111010011110010100000011110111111011011111010101111011100111000011011110010101000001101111111000011110110101111111101111111111011110110100000000001100000011011110010111111111111101111000011111010111000000011101111111111111010000011111010000000000011110011111000111110111111110111110111011110111100110000000111110000000110031111111101110111111111111111111111111111111111111111111111111111111111111111");
+		new Maze("111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111131111111111111111111111111111101111111111111111111111111111101111111111111111111111113111101111111111111111111111110111101111111111111111111111110111101111111111111111111111112000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
 	}
-
 }
