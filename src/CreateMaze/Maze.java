@@ -148,7 +148,7 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 				}
 		int X = (int) d.getX();
 		int Y = (int) d.getY();
-		if (b[X][Y] == MMM) {
+		if (b[X][Y] == MMM || a[X][Y] != 3) {
 			return;
 		}
 //		System.out.println(X + " " + Y + " " + b[X][Y]);
