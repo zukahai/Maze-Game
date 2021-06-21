@@ -123,7 +123,7 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 			p = st.poll();
 			int X = (int) p.getX();
 			int Y = (int) p.getY();
-			System.out.println(b[X][Y]);
+//			System.out.println(b[X][Y]);
 			for (int i = X - 1; i <= X + 1; i++)
 				for (int j = Y - 1; j <= Y + 1; j++)
 					if (i >= 0 && i < M && j >= 0 && j < N &&Math.abs(i - X) + Math.abs(j - Y) == 1) {
@@ -136,11 +136,11 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 			
 		}
 		
-		for (int i = 0; i < M; i++) {
-			for (int j = 0; j < N; j++)
-				System.out.print(b[i][j] + " ");
-			System.out.println();
-		}
+//		for (int i = 0; i < M; i++) {
+//			for (int j = 0; j < N; j++)
+//				System.out.print(b[i][j] + " ");
+//			System.out.println();
+//		}
 		for (int i = 0; i < M; i++)
 			for (int j = 0; j < N; j++)
 				if (b[i][j] != MMM && a[i][j] == 3 && b[i][j] < b[(int) d.getX()][(int) d.getY()]) {
@@ -151,12 +151,12 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 		if (b[X][Y] == MMM) {
 			return;
 		}
-		System.out.println(X + " " + Y + " " + b[X][Y]);
+//		System.out.println(X + " " + Y + " " + b[X][Y]);
 		while (b[X][Y] > 1) {
 			System.out.println(X + " " + Y);
 			for (int i = X - 1; i <= X + 1; i++)
 				for (int j = Y - 1; j <= Y + 1; j++)
-					if (Math.abs(i - X) + Math.abs(j - Y) == 1 && b[i][j] - b[X][Y] == -1) {
+					if (i >= 0 && i < M && j >= 0 && j < N && Math.abs(i - X) + Math.abs(j - Y) == 1 && b[i][j] - b[X][Y] == -1) {
 						if (a[i][j] != 2) {
 							bt[i][j].setBackground(Color.orange);
 						}
@@ -235,6 +235,6 @@ public class Maze extends JFrame implements ActionListener, KeyListener{
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		new Maze("111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111131111111111111111111111111111101111111111111111111111111111101111111111111111111111113111101111111111111111111111110111101111111111111111111111110111101111111111111111111111112000001111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111111");
+		new Maze();
 	}
 }
